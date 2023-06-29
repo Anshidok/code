@@ -1,0 +1,158 @@
+<form id="form1" runat="server">
+    <div>
+        <table style="width: 100%;">
+            <tr>
+                <td>
+                   Name :
+                </td>
+                <td>
+                    <asp:TextBox ID="txtName" runat="server"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Mobile :
+                </td>
+                <td>
+                    <asp:TextBox ID="txtMobile" runat="server"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Sex:
+                </td>
+                <td>
+                    <asp:DropDownList ID="ddlSex" runat="server">
+                    <asp:ListItem >SELECT</asp:ListItem>
+                    <asp:ListItem Value="male">M</asp:ListItem>
+                    <asp:ListItem Value="female">F </asp:ListItem>
+                    <asp:ListItem Value="other">O</asp:ListItem>
+                    </asp:DropDownList>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Date of Birth
+                </td>
+                <td>
+                    <asp:TextBox ID="txtDateOfBirth" runat="server" ></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Button   ID="btnSubmit" runat="server" Text="Submit" 
+                        onclick="btnSubmit_Click" />
+                </td>
+                <td>
+                    <asp:Label ID="txtResult" runat="server" Text=""></asp:Label>
+                </td>
+            </tr>
+        </table>
+    </div>
+    </form>
+
+
+
+
+
+
+
+
+
+ <connectionStrings>
+    <add name="OracleConnectionString" providerName="Oracle.ManagedDataAccess.Client"
+        connectionString="Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=orcl1)));
+        User Id=anshid;
+        Password=anshid;" />
+</connectionStrings>
+
+
+
+
+
+
+
+
+
+//using Oracle.ManagedDataAccess;
+using System.Configuration;
+//using Oracle.DataAccess;
+
+
+
+
+
+
+
+ string connectionString = ConfigurationManager.ConnectionStrings["OracleConnectionString"].ConnectionString;
+            OracleConnection connection = new OracleConnection(connectionString);
+
+
+
+
+
+
+
+
+
+
+
+
+string insertQuery = "INSERT INTO YourTable (Column1, Column2) VALUES (@Value1, @Value2)";
+OracleCommand cmd = new OracleCommand(insertQuery, con);
+cmd.Parameters.AddWithValue("@Value1", TextBox1.Text);
+cmd.Parameters.AddWithValue("@Value2", TextBox2.Text);
+cmd.ExecuteNonQuery();
+
+
+
+
+
+
+
+
+
+using System;
+using System.Data;
+using Oracle.ManagedDataAccess.Client;
+
+namespace OracleInsertExample
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string connectionString = "Data Source=<your_data_source>;User Id=<your_username>;Password=<your_password>;";
+
+            using (OracleConnection connection = new OracleConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    string query = "INSERT INTO YourTable (Column1, Column2) VALUES (:param1, :param2)";
+
+                    using (OracleCommand command = new OracleCommand(query, connection))
+                    {
+                        command.Parameters.Add(new OracleParameter("param1", "Value1")); // Replace with your actual parameter values
+                        command.Parameters.Add(new OracleParameter("param2", "Value2")); // Replace with your actual parameter values
+
+                        int rowsAffected = command.ExecuteNonQuery();
+
+                        Console.WriteLine("Rows inserted: " + rowsAffected);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+            Console.ReadLine();
+        }
+    }
+}
