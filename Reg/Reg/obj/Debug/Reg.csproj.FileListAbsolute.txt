@@ -1,0 +1,5 @@
+c:\users\dell\documents\visual studio 2010\Projects\Reg\Reg\bin\Reg.dll
+c:\users\dell\documents\visual studio 2010\Projects\Reg\Reg\bin\Reg.pdb
+c:\users\dell\documents\visual studio 2010\Projects\Reg\Reg\obj\Debug\Reg.dll
+c:\users\dell\documents\visual studio 2010\Projects\Reg\Reg\obj\Debug\Reg.pdb
+C:\Users\DELL\documents\visual studio 2010\Projects\Reg\Reg\obj\Debug\Reg.csprojResolveAssemblyReference.cache
